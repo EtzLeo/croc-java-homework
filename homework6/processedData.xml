@@ -1,0 +1,55 @@
+<people>
+  <person>
+    <name>Человек 1</name>
+    <films>
+      <film title="Фильм 1">
+        <functions>
+          <function name="Режиссер"/>
+          <function name="Сценарист"/>
+        </functions>
+      </film>
+    </films>
+  </person>
+  <person>
+    <name>Человек 2</name>
+    <films>
+      <film title="Фильм 1">
+        <functions>
+          <function name="Сценарист"/>
+        </functions>
+      </film>
+      <film title="Фильм 2">
+        <functions>
+          <function name="Режиссер"/>
+          <function name="Сценарист"/>
+        </functions>
+      </film>
+    </films>
+  </person>
+  <person>
+    <name>Человек 3</name>
+    <films>
+      <film title="Фильм 1">
+        <functions>
+          <function name="Режиссер"/>
+        </functions>
+      </film>
+      <film title="Фильм 2">
+        <functions>
+          <function name="Режиссер"/>
+          <function name="Сценарист"/>
+        </functions>
+      </film>
+    </films>
+  </person>
+  <person>
+    <name>Человек 4</name>
+    <films>
+      <film title="Фильм 2">
+        <functions>
+          <function name="Режиссер"/>
+        </functions>
+      </film>
+    </films>
+  </person>
+</people>

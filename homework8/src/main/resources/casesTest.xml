@@ -1,0 +1,23 @@
+<patients>
+    <sick>
+        <patient>
+            <name>John</name>
+            <surname>Doe</surname>
+            <middlename/>
+            <passportnumber>0310 123456</passportnumber>
+            <medicalpolice>123456789012345</medicalpolice>
+            <birthdate>13.04.1990</birthdate>
+            <disasedate>20.04.2021</disasedate>
+        </patient>
+        <patient>
+            <name>Ivanov</name>
+            <surname>Ivan</surname>
+            <middlename>Ivanovich</middlename>
+            <passportnumber>0000 123457</passportnumber>
+            <medicalpolice>123456789012346</medicalpolice>
+            <birthdate>12.05.1998</birthdate>
+            <disasedate>20.04.2021</disasedate>
+        </patient>
+    </sick>
+    <healthy/>
+</patients>

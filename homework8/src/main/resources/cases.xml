@@ -1,0 +1,33 @@
+<patients>
+  <sick>
+    <patient>
+      <name>Alice</name>
+      <surname>Rough</surname>
+      <middlename/>
+      <passportnumber>0000 123450</passportnumber>
+      <medicalpolice>123456789012340</medicalpolice>
+      <birthdate>13.04.1990</birthdate>
+      <disasedate>20.04.2021</disasedate>
+    </patient>
+    <patient>
+      <name>Linda</name>
+      <surname>Rough</surname>
+      <middlename/>
+      <passportnumber>0000 123440</passportnumber>
+      <medicalpolice>123456789012350</medicalpolice>
+      <birthdate>13.04.1990</birthdate>
+      <disasedate>20.04.2021</disasedate>
+    </patient>
+  </sick>
+  <healthy>
+    <patient>
+      <name>Ivanov</name>
+      <surname>Ivan</surname>
+      <middlename>Ivanovich</middlename>
+      <passportnumber>0000 123457</passportnumber>
+      <medicalpolice>123456789012346</medicalpolice>
+      <birthdate>12.05.1998</birthdate>
+      <curedate>20.04.2021</curedate>
+  </patient>
+</healthy>
+</patients>

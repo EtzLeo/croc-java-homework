@@ -1,24 +1,27 @@
-package ru.croc.javaschool.homework8.model.xmlperson.patient;
+package ru.croc.javaschool.homework8.model.xmlmarshaling;
+
+import ru.croc.javaschool.homework8.model.DischargedPerson;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 /**
- * Wrapper для выписанных пациентов.
+ * Список выписанных пациентов.
+ * Служит для корректной сериализации данных.
  */
 @XmlRootElement(name = "patients")
-public class DischargedPatientsWrapper {
+public class DischargedPatientsList {
     /**
      * Пациенты.
      */
     @XmlElement(name = "patient")
     private List<DischargedPerson> patients;
 
-    public DischargedPatientsWrapper() {
+    public DischargedPatientsList() {
     }
 
-    public DischargedPatientsWrapper(List<DischargedPerson> patients) {
+    public DischargedPatientsList(List<DischargedPerson> patients) {
         this.patients = patients;
     }
 

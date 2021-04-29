@@ -1,24 +1,25 @@
-package ru.croc.javaschool.homework8.model.xmlperson.newcase;
+package ru.croc.javaschool.homework8.model.xmlmarshaling;
 
 import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 
 /**
- * Wrapper для пациентов.
+ * Список пациентов.
+ * Служит для корректной сериализации данных.
  *
- * @param <T> тип пауиента.
+ * @param <T> тип пациента.
  */
-public class PatientWrapper<T> {
+public class PatientsList<T> {
     /**
      * Пациенты.
      */
     @XmlElement(name = "patient")
     private List<T> patients;
 
-    public PatientWrapper() {
+    public PatientsList() {
     }
 
-    public PatientWrapper(List<T> patients) {
+    public PatientsList(List<T> patients) {
         this.patients = patients;
     }
 

@@ -1,11 +1,11 @@
 package ru.croc.javaschool.homework8.converter;
 
-import ru.croc.javaschool.homework8.model.dbperson.Patient;
-import ru.croc.javaschool.homework8.model.xmlperson.newcase.CurePerson;
-import ru.croc.javaschool.homework8.model.xmlperson.newcase.DiseasePerson;
-import ru.croc.javaschool.homework8.model.xmlperson.newcase.NewCasesWrapper;
-import ru.croc.javaschool.homework8.model.xmlperson.patient.DischargedPatientsWrapper;
-import ru.croc.javaschool.homework8.model.xmlperson.patient.DischargedPerson;
+import ru.croc.javaschool.homework8.model.Patient;
+import ru.croc.javaschool.homework8.model.CurePerson;
+import ru.croc.javaschool.homework8.model.DiseasePerson;
+import ru.croc.javaschool.homework8.model.xmlmarshaling.NewCasesList;
+import ru.croc.javaschool.homework8.model.xmlmarshaling.DischargedPatientsList;
+import ru.croc.javaschool.homework8.model.DischargedPerson;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -29,7 +29,7 @@ public class ObjectConverter {
      * @param newCases новые случаи заболевания и(или) выздоровления
      * @return список пациентов
      */
-    public List<Patient> convert(DischargedPatientsWrapper allPatients, NewCasesWrapper newCases){
+    public List<Patient> convert(DischargedPatientsList allPatients, NewCasesList newCases){
         try{
             allPatients.getPatients().forEach(patient -> patients.add(convertObject(patient)));
         } catch (NullPointerException e) {

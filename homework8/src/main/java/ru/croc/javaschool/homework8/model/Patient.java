@@ -1,6 +1,4 @@
-package ru.croc.javaschool.homework8.model.dbperson;
-
-import ru.croc.javaschool.homework8.model.Person;
+package ru.croc.javaschool.homework8.model;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -8,7 +6,7 @@ import java.util.Objects;
 /**
  * Пациент.
  */
-public class Patient extends Person {
+public class Patient extends Person<LocalDate> {
     /**
      * Идентификатор.
      */
@@ -29,21 +27,18 @@ public class Patient extends Person {
      */
     private boolean isSick;
 
-    /**
-     * Дата рождения.
-     */
-    private LocalDate birthDate;
-
     public Patient(int id, String name, String surname, String middleName, LocalDate birthDate,
                    String passportNumber, String medicalPolicy, LocalDate diseaseDate,
                    LocalDate cureDate, boolean isSick) {
 
-        super(name, surname, middleName, passportNumber, medicalPolicy);
+        super(name, surname, middleName, passportNumber, medicalPolicy, birthDate);
         this.id = id;
         this.diseaseDate = diseaseDate;
         this.cureDate = cureDate;
         this.isSick = isSick;
-        this.birthDate = birthDate;
+    }
+
+    public Patient() {
     }
 
     public int getId() {
@@ -74,14 +69,6 @@ public class Patient extends Person {
         isSick = sick;
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
     @Override
     public String toString() {
         return "Patient{" +
@@ -89,7 +76,6 @@ public class Patient extends Person {
                 ", diseaseDate=" + diseaseDate +
                 ", cureDate=" + cureDate +
                 ", isSick=" + isSick +
-                ", birthDate=" + birthDate +
                 "} " + super.toString();
     }
 
@@ -99,12 +85,11 @@ public class Patient extends Person {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Patient patient = (Patient) o;
-        return id == patient.id && isSick == patient.isSick && Objects.equals(diseaseDate, patient.diseaseDate) &&
-                Objects.equals(cureDate, patient.cureDate) && Objects.equals(birthDate, patient.birthDate);
+        return id == patient.id && isSick == patient.isSick && Objects.equals(diseaseDate, patient.diseaseDate) && Objects.equals(cureDate, patient.cureDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), id, diseaseDate, cureDate, isSick, birthDate);
+        return Objects.hash(super.hashCode(), id, diseaseDate, cureDate, isSick);
     }
 }

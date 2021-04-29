@@ -1,4 +1,4 @@
-package ru.croc.javaschool.homework8.model.xmlperson.newcase;
+package ru.croc.javaschool.homework8.model;
 
 import ru.croc.javaschool.homework8.model.Person;
 import javax.xml.bind.annotation.XmlElement;
@@ -6,13 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 /**
  * Здоровый пациент.
  */
-public class CurePerson extends Person {
-    /**
-     * Дата рождения в виде строки.
-     */
-    @XmlElement(name = "birthdate")
-    private String birthDate;
-
+public class CurePerson extends Person<String> {
     /**
      * Дата выздоровления в виде строки.
      */
@@ -25,9 +19,8 @@ public class CurePerson extends Person {
     public CurePerson(String name, String surname, String middleName, String birthDate,
                       String passportNumber, String medicalPolicy, String cureDate) {
 
-        super(name, surname, middleName, passportNumber, medicalPolicy);
+        super(name, surname, middleName, passportNumber, medicalPolicy, birthDate);
         this.cureDate = cureDate;
-        this.birthDate = birthDate;
     }
 
     public String getCureDate() {
@@ -38,19 +31,10 @@ public class CurePerson extends Person {
         this.cureDate = cureDate;
     }
 
-    public String getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
-    }
-
     @Override
     public String toString() {
         return "CurePerson{" +
-                "birthDate='" + birthDate + '\'' +
-                ", cureDate='" + cureDate + '\'' +
+                "cureDate='" + cureDate + '\'' +
                 "} " + super.toString();
     }
 }

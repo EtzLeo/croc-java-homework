@@ -1,7 +1,7 @@
 package ru.croc.javaschool.homework8.repository;
 
 import org.apache.derby.jdbc.EmbeddedDataSource;
-import ru.croc.javaschool.homework8.model.dbperson.Patient;
+import ru.croc.javaschool.homework8.model.Patient;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -109,6 +109,100 @@ public class PatientRepository {
             System.out.println("Ошибка выполнения запроса: " + e.getMessage());
         }
         return new ArrayList<>();
+    }
+
+    /**
+     * Поиск человека по ID.
+     *
+     * @param id идентификатор
+     * @return человек
+     */
+    public Patient search(int id) {
+        String sqlQuery = "SELECT * FROM " + TABLE_NAME + " WHERE " + "id=" + id;
+        try (Connection connection = dataSource.getConnection();
+             Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            Patient patient = new Patient();
+            while (resultSet.next()) {
+                LocalDate diseaseDate = null;
+                LocalDate cureDate = null;
+                if (resultSet.getDate("diseaseDate") != null) {
+                    diseaseDate = resultSet.getDate("diseaseDate").toLocalDate();
+                }
+                if (resultSet.getDate("cureDate") != null) {
+                    cureDate = resultSet.getDate("cureDate").toLocalDate();
+
+                }
+
+                patient =
+                        new Patient(
+                                resultSet.getInt("id"),
+                                resultSet.getString("name"),
+                                resultSet.getString("surname"),
+                                resultSet.getString("middleName"),
+                                resultSet.getDate("birthDate").toLocalDate(),
+                                resultSet.getString("passportNumber"),
+                                resultSet.getString("medicalPolicy"),
+                                diseaseDate,
+                                cureDate,
+                                resultSet.getBoolean("isSick"));
+            }
+            return patient;
+        } catch (SQLException e) {
+            System.out.println("Ошибка выполнения запроса: " + e.getMessage());
+        }
+        return new Patient();
+    }
+
+    /**
+     * Поиск человека по номеру паспорта и полису.
+     *
+     * @param passportNumber номер паспорта
+     * @param medicalPolicy полис
+     * @return человек
+     */
+    public Patient search(String passportNumber, String medicalPolicy) {
+        String sqlQuery =
+                "SELECT * FROM " +
+                        TABLE_NAME +
+                        " WHERE " +
+                        "passportNumber='" +
+                        passportNumber +
+                        "' AND medicalPolicy='" +
+                        medicalPolicy + "'";
+        try (Connection connection = dataSource.getConnection();
+             Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+
+            while (resultSet.next()) {
+                LocalDate diseaseDate = null;
+                LocalDate cureDate = null;
+                if (resultSet.getDate("diseaseDate") != null) {
+                    diseaseDate = resultSet.getDate("diseaseDate").toLocalDate();
+                }
+                if (resultSet.getDate("cureDate") != null) {
+                    cureDate = resultSet.getDate("cureDate").toLocalDate();
+
+                }
+
+                Patient patient =
+                        new Patient(
+                                resultSet.getInt("id"),
+                                resultSet.getString("name"),
+                                resultSet.getString("surname"),
+                                resultSet.getString("middleName"),
+                                resultSet.getDate("birthDate").toLocalDate(),
+                                resultSet.getString("passportNumber"),
+                                resultSet.getString("medicalPolicy"),
+                                diseaseDate,
+                                cureDate,
+                                resultSet.getBoolean("isSick"));
+                return patient;
+            }
+        } catch (SQLException e) {
+            System.out.println("Ошибка выполнения запроса: " + e.getMessage());
+        }
+        return new Patient();
     }
 
     /**

@@ -1,4 +1,4 @@
-package ru.croc.javaschool.homework8.model.xmlperson.patient;
+package ru.croc.javaschool.homework8.model;
 
 import ru.croc.javaschool.homework8.model.Person;
 
@@ -7,13 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 /**
  * Выписанный пациент.
  */
-public class DischargedPerson extends Person {
-    /**
-     * Дата рождения в виде строки.
-     */
-    @XmlElement(name = "birthdate")
-    private String birthDate;
-
+public class DischargedPerson extends Person<String> {
     /**
      * Дата заболевания в виде строки.
      */
@@ -33,10 +27,9 @@ public class DischargedPerson extends Person {
                             String passportNumber, String medicalPolicy, String diseaseDate,
                             String cureDate) {
 
-        super(name, surname, middleName, passportNumber, medicalPolicy);
+        super(name, surname, middleName, passportNumber, medicalPolicy, birthDate);
         this.diseaseDate = diseaseDate;
         this.cureDate = cureDate;
-        this.birthDate = birthDate;
     }
 
     public String getDiseaseDate() {
@@ -55,19 +48,10 @@ public class DischargedPerson extends Person {
         this.cureDate = cureDate;
     }
 
-    public String getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
-    }
-
     @Override
     public String toString() {
         return "DischargedPerson{" +
-                "birthDate='" + birthDate + '\'' +
-                ", diseaseDate='" + diseaseDate + '\'' +
+                "diseaseDate='" + diseaseDate + '\'' +
                 ", cureDate='" + cureDate + '\'' +
                 "} " + super.toString();
     }

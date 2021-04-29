@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * Человек.
  */
-public abstract class Person {
+public abstract class Person<T> {
     /**
      * Имя.
      */
@@ -37,15 +37,22 @@ public abstract class Person {
     @XmlElement(name = "medicalpolice")
     private String medicalPolicy;
 
+    /**
+     * Дата рождения.
+     */
+    @XmlElement(name = "birthdate")
+    private T birthDate;
+
     public Person() {
     }
 
-    public Person(String name, String surname, String middleName, String passportNumber, String medicalPolicy) {
+    public Person(String name, String surname, String middleName, String passportNumber, String medicalPolicy, T birthDate) {
         this.name = name;
         this.surname = surname;
         this.middleName = middleName;
         this.passportNumber = passportNumber;
         this.medicalPolicy = medicalPolicy;
+        this.birthDate = birthDate;
     }
 
     public String getName() {
@@ -88,6 +95,14 @@ public abstract class Person {
         this.medicalPolicy = medicalPolicy;
     }
 
+    public T getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(T birthDate) {
+        this.birthDate = birthDate;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
@@ -96,6 +111,7 @@ public abstract class Person {
                 ", middleName='" + middleName + '\'' +
                 ", passportNumber='" + passportNumber + '\'' +
                 ", medicalPolicy='" + medicalPolicy + '\'' +
+                ", birthDate=" + birthDate +
                 '}';
     }
 
@@ -103,12 +119,12 @@ public abstract class Person {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Person person = (Person) o;
-        return Objects.equals(name, person.name) && Objects.equals(surname, person.surname) && Objects.equals(middleName, person.middleName) && Objects.equals(passportNumber, person.passportNumber) && Objects.equals(medicalPolicy, person.medicalPolicy);
+        Person<?> person = (Person<?>) o;
+        return Objects.equals(name, person.name) && Objects.equals(surname, person.surname) && Objects.equals(middleName, person.middleName) && Objects.equals(passportNumber, person.passportNumber) && Objects.equals(medicalPolicy, person.medicalPolicy) && Objects.equals(birthDate, person.birthDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, surname, middleName, passportNumber, medicalPolicy);
+        return Objects.hash(name, surname, middleName, passportNumber, medicalPolicy, birthDate);
     }
 }

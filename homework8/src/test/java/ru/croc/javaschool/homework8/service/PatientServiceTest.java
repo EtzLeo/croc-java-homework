@@ -1,4 +1,4 @@
-package ru.croc.javaschool.homework8;
+package ru.croc.javaschool.homework8.service;
 
 import jdk.jfr.Description;
 import org.junit.jupiter.api.AfterEach;
@@ -6,9 +6,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.croc.javaschool.homework8.dbprovider.DataSourceProvider;
-import ru.croc.javaschool.homework8.model.dbperson.Patient;
+import ru.croc.javaschool.homework8.model.Patient;
 import ru.croc.javaschool.homework8.repository.PatientRepository;
-import ru.croc.javaschool.homework8.service.PatientService;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -81,10 +80,16 @@ public class PatientServiceTest {
     @Test
     @Description("Тест возвращения записи БД по ID.")
     public void testGetById() throws IOException {
+        Assertions.assertEquals(sasha, service.getById(1));
+        Assertions.assertEquals(new Patient(), service.getById(-1));
+        Assertions.assertEquals(new Patient(), service.getById(4));
+    }
+    @Test
+    @Description("Тест возвращения записи БД по данным паспорта и полиса.")
+    public void testGetByDocuments() throws IOException {
 
-        Assertions.assertEquals(service.getById(1), sasha);
-        Assertions.assertNull(service.getById(-1));
-        Assertions.assertNull(service.getById(4));
+        Assertions.assertEquals(sasha, service.getByDocuments("0103", "111"));
+        Assertions.assertEquals(new Patient(), service.getByDocuments("1010", "1010"));
     }
 
     @Test
@@ -92,11 +97,11 @@ public class PatientServiceTest {
     public void testDelete() throws IOException {
         Assertions.assertEquals(service.getById(1), sasha);
         service.delete(1);
-        Assertions.assertNull(service.getById(1));
+        Assertions.assertEquals(new Patient(), service.getById(1));
 
         Assertions.assertEquals(service.getById(2),pasha);
         service.delete(pasha);
-        Assertions.assertNull(service.getById(2));
+        Assertions.assertEquals(new Patient(), service.getById(2));
     }
 
     @Test
@@ -117,11 +122,7 @@ public class PatientServiceTest {
                 false);
 
         service.update(oleg);
-        Assertions.assertTrue(service.search(oleg));
-        System.out.println(service.getAll());
-
         Assertions.assertEquals(service.getById(2), oleg);
-
     }
 
     @Test
@@ -155,7 +156,7 @@ public class PatientServiceTest {
                 false)
         );
 
-        Assertions.assertNull(service.getById(5));
+        Assertions.assertEquals(new Patient(), service.getById(5));
     }
 
     @AfterEach

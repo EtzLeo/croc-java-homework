@@ -1,6 +1,6 @@
 package ru.croc.javaschool.homework8.service;
 
-import ru.croc.javaschool.homework8.model.dbperson.Patient;
+import ru.croc.javaschool.homework8.model.Patient;
 import ru.croc.javaschool.homework8.repository.PatientRepository;
 
 import java.util.List;
@@ -25,7 +25,7 @@ public class PatientService {
      * @param patient человек
      */
     public void insert(Patient patient) {
-        if (!search(patient)) {
+        if (getByDocuments(patient.getPassportNumber(), patient.getMedicalPolicy()).equals(new Patient())) {
             repository.createNew(patient);
         }
     }
@@ -46,28 +46,18 @@ public class PatientService {
      * @return человек
      */
     public Patient getById(int id) {
-        for(Patient patient: repository.findAll()) {
-            if (patient.getId() == id) {
-                return patient;
-            }
-        }
-        return null;
+        return repository.search(id);
     }
 
     /**
-     * Есть ли человек в бд.
+     * Возвращает запись о человеке по его данным паспорта и полиса.
      *
-     * @param currentPatient искомый человек.
-     * @return true - если запись о человеке есть в бд, false - если ее там нет.
+     * @param passportNumber номер паспорта
+     * @param medicalPolicy номер полиса
+     * @return человек
      */
-    public boolean search(Patient currentPatient) {
-        for(Patient patient: repository.findAll()) {
-            if (patient.getMedicalPolicy().equals(currentPatient.getMedicalPolicy()) &&
-                    patient.getPassportNumber().equals(currentPatient.getPassportNumber())) {
-                return true;
-            }
-        }
-        return false;
+    public Patient getByDocuments(String passportNumber, String medicalPolicy) {
+        return repository.search(passportNumber, medicalPolicy);
     }
 
     /**
